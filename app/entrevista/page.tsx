@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import Select, { components } from "react-select";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import Image from "next/image";
+import type { GroupBase, DropdownIndicatorProps } from "react-select";
 
 export default function Entrevista() {
   const opciones = [
@@ -19,7 +21,9 @@ export default function Entrevista() {
 
   const [selectedOption, setSelectedOption] = useState<{ value: string; label: string } | null>(opciones[0]);
 
-  const DropdownIndicator = (props: any) => {
+  const DropdownIndicator = (
+    props: DropdownIndicatorProps<{ value: string; label: string }, boolean, GroupBase<{ value: string; label: string }>>
+  ) => {
     return (
       components.DropdownIndicator && (
         <components.DropdownIndicator {...props}>
@@ -41,9 +45,11 @@ export default function Entrevista() {
     <div className="flex flex-col items-center py-10 min-h-[85vh] bg-gray-100">
       {/* Logo */}
       <div className="mb-4">
-        <img
+        <Image
           src="/logo_cul_2015.png"
           alt="Logo CUL"
+          width={235} 
+          height={90}
           className="object-contain max-h-[80px]"
         />
       </div>
@@ -87,7 +93,7 @@ export default function Entrevista() {
                 id="tipoId"
                 options={opciones}
                 value={selectedOption}
-                onChange={(option) => setSelectedOption(option)}
+                onChange={(option) => setSelectedOption(option as { value: string; label: string } | null)}
                 className="text-sm text-gray-700 cursor-pointer"
                 components={{ DropdownIndicator }}
                 styles={{

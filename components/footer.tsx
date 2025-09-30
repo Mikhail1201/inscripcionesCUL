@@ -1,6 +1,5 @@
 // components/Footer.tsx
 "use client";
-import { useState } from "react";
 
 export default function Footer() {
 
